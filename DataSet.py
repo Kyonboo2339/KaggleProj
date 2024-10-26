@@ -17,15 +17,18 @@ class DataSet():
         return DataSet(self.df.loc[self.df[attribute] == value])
     
     def mostCommonLabel(self):
-        return self.df["label"].mode()[0]
+        stats = self.df.groupby("income>50K").size()
+        if 1 not in stats.keys():
+            return 0
+        return stats[1]/self.Count
     
     def hasSameLabel(self):
-        return len(self.df["label"].unique()) == 1
+        return len(self.df["income>50K"].unique()) == 1
     
     #Return percentage of rows assigned to each label for the set
     def labelProportions(self):
         if self.df_counts == None:
-            value_counts = self.df.groupby("label").size()
+            value_counts = self.df.groupby("income>50K").size()
             self.df_counts = {label: value_counts[label]/self.Count for label in value_counts.keys()}
         return self.df_counts
     
@@ -49,7 +52,7 @@ class DataSet():
             attributeValueCount = len(rows_with_value.index)
             attributeLabelCount[attributeValue] = {}
 
-            attributeValueLabelCount = rows_with_value.groupby("label").size()
+            attributeValueLabelCount = rows_with_value.groupby("income>50K").size()
             for label in attributeValueLabelCount.keys():
                 attributeLabelCount[attributeValue][label] = None
                 
@@ -63,7 +66,7 @@ class DataSet():
     
     def getAttributes(self):
         attributes = self.df.columns.values.tolist()
-        attributes.remove("label")
+        attributes.remove("income>50K")
 
         return attributes
     

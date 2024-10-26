@@ -21,6 +21,10 @@ class ID3Tree:
         
         while True: 
             value = datum[attributeMap[currNode.attribute]]
+            # print(datum)
+            # print(attributeMap[currNode.attribute])
+            # print(currNode.attribute)
+            # print(currNode.branches)
             if isinstance(currNode.branches[value], ID3Tree.ID3Node):
                 currNode = currNode.branches[value]
             else:
@@ -60,7 +64,7 @@ class ID3Tree:
     def chooseAttribute(self, dataSet):
         bestAttribute = None
         maxGain = float("-inf")
-        for attributeID in dataSet.getAttributes():
+        for attributeID in self.data.getAttributes():
             attributeGain = self.calculateGain(attributeID, dataSet)
             if attributeGain > maxGain:
                 bestAttribute = attributeID
