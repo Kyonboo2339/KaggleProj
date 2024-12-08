@@ -61,14 +61,14 @@ unknownReplacements["native.country"] =  df["native.country"].mode()
 
 df_test = pd.read_csv('test_final.csv')
 print("test before")
-print(df_test)
-for attribute in attributeIntervals:
-    bounds = list(set(attributeIntervals[attribute]))
-    list.sort(bounds)
-    print(bounds)
-    _labels = [i for i in range(len(bounds) - 1)]
-    df_test[attribute] = pd.cut(df_test[attribute], bounds, labels= _labels)
-    df[attribute] = pd.cut(df[attribute], bounds, labels= _labels)
+#print(df_test)
+# for attribute in attributeIntervals:
+#     bounds = list(set(attributeIntervals[attribute]))
+#     list.sort(bounds)
+#     print(bounds)
+#     _labels = [i for i in range(len(bounds) - 1)]
+#     df_test[attribute] = pd.cut(df_test[attribute], bounds, labels= _labels)
+#     df[attribute] = pd.cut(df[attribute], bounds, labels= _labels)
 
 for attribute in unknownReplacements:
     df_test[attribute].replace(to_replace=['?'], value=unknownReplacements[attribute], inplace=True)
