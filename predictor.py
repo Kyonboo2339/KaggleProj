@@ -32,11 +32,11 @@ param_dist = {'n_estimators': [14],
               'max_depth': [380]}
 
 
-# rf = RandomForestClassifier(bootstrap=False,max_depth=16, min_samples_leaf=2, min_samples_split=10, n_estimators=265)
-# rf.fit(X_train,y_train)
-# best_rf = rf
+rf = RandomForestClassifier(bootstrap=False,max_depth=15, min_samples_leaf=40, n_estimators=2000)
+rf.fit(X,Y)
+best_rf = rf
 
-rf = RandomForestClassifier()
+# rf = RandomForestClassifier()
 # rand_search = RandomizedSearchCV(rf, 
 #                                  param_distributions = param_dist, 
 #                                  n_iter=1, 
@@ -47,20 +47,20 @@ rf = RandomForestClassifier()
 # print('Best hyperparameters:',  rand_search.best_params_)
 # best_rf = rand_search.best_estimator_
 
-param_grid = {
-    'bootstrap': [False, True],
-    'max_depth': [12, 14, 15],
-    'min_samples_leaf': [40, 60, 80],
-    'n_estimators': [600, 800, 1000]
-}# Create a based model
-grid_search = GridSearchCV(estimator = rf, param_grid = param_grid, 
-                          cv = 3, n_jobs = -1)
+# param_grid = {
+#     'bootstrap': [False],
+#     'max_depth': [14, 15, 16],
+#     'min_samples_leaf': [30, 40,50],
+#     'n_estimators': [600,1000, 1500]
+# }# Create a based model
+# grid_search = GridSearchCV(estimator = rf, param_grid = param_grid, 
+#                           cv = 3, n_jobs = -1)
 
 
 
-grid_search.fit(X_train, y_train)
-print('Best hyperparameters:',  grid_search.best_params_)
-best_rf = grid_search.best_estimator_
+# grid_search.fit(X_train, y_train)
+# print('Best hyperparameters:',  grid_search.best_params_)
+# best_rf = grid_search.best_estimator_
 
 
 # # Print the best hyperparameters
